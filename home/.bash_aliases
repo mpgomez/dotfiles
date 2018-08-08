@@ -6,6 +6,8 @@ alias docker-cleanc="docker ps -a -q | xargs docker rm -f"
 alias docker-cleani="docker images -q | xargs docker rmi"
 alias docker-cleanup="docker-cleanc; docker-cleani"
 
+alias docker-reg-gitlab-login="docker login -u gitlab-ci-token -p $ACCESS_TOKEN  registry.gitlab.com"
+
 docker-id-i() {
     docker images | grep $1 | awk '{print $3}'
 }
