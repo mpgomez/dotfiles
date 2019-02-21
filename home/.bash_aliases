@@ -13,6 +13,8 @@ alias docker-cleanup="docker-cleanc; docker-cleani-f"
 
 alias docker-reg-gitlab-login="docker login -u gitlab-ci-token -p $ACCESS_TOKEN  registry.gitlab.com"
 
+alias git-pull-all="${HOME}/.aliases/git_pull_all.sh"
+
 docker-id-i() {
     docker images | grep $1 | awk '{print $3}'
 }
@@ -38,3 +40,5 @@ export GOPATH="${HOME}/go"
 if [ -f ~/.bash_vars ]; then
     . ~/.bash_vars
 fi
+
+source ~/.bash_work/.hmrc
