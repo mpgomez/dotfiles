@@ -2,9 +2,14 @@
 source /home/pilar/.homesick/repos/homeshick/homeshick.sh
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
+if [ -f ~/.bash_extras ]; then
+    source ~/.bash_extras
+fi
+
 alias docker-cleanc="docker ps -a -q | xargs docker rm -f"
 alias docker-cleani="docker images -q | xargs docker rmi"
-alias docker-cleanup="docker-cleanc; docker-cleani"
+alias docker-cleani-f="docker images -q | xargs docker rmi -f"
+alias docker-cleanup="docker-cleanc; docker-cleani-f"
 
 alias docker-reg-gitlab-login="docker login -u gitlab-ci-token -p $ACCESS_TOKEN  registry.gitlab.com"
 
@@ -26,3 +31,10 @@ docker-rm-c() {
 docker-bash() {
     docker exec -it $(docker-id-c $1) /bin/bash
 }
+
+export GOPATH="${HOME}/go"
+
+# Source senstive env vars
+if [ -f ~/.bash_vars ]; then
+    . ~/.bash_vars
+fi
