@@ -1,6 +1,6 @@
 #!/bin/bash
 
-scan_comand="sudo clamscan --recursive=yes --exclude-dir=/proc --exclude-dir=/sys -i / > ${HOME}/scan_report.txt"
+scan_comand="sudo clamscan --recursive=yes --exclude-dir=/home/pilar/code/hmrc_all --exclude-dir=/home/pilar/code/hmrc --exclude-dir=/proc --exclude-dir=/sys -i / > ${HOME}/scan_report.txt"
 mkdir -p ${HOME}/scans
 result_location="${HOME}/scans/scan_results$( date +'%s').txt"
 echo "Going to run ${scan_comand}"

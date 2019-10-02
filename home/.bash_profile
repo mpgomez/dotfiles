@@ -10,10 +10,26 @@ function start_agent {
     /usr/bin/ssh-add;
 }
 
+# Will add to path only if:
+# * The directory or file exists
+# * And it is not already in the path
+add-to-path () {
+  if test -e "$1"; then
+    if ! echo "$PATH" | /bin/grep -Eq "(^|:)$1($|:)" ; then
+      if [ "$2" = "after" ] ; then
+        PATH="$PATH:$1"
+      else
+        PATH="$1:$PATH"
+      fi
+    fi
+  fi
+}
+
 # Update PATH
-export PATH="$HOME/.pkenv/bin:$PATH"
-export PATH="/home/pilar/Software/bin/:${PATH}"
-export PATH="${GOPATH}/bin:${PATH}"
+add-to-path "$HOME/.pkenv/bin:$PATH"
+add-to-path "/home/pilar/Software/bin/:${PATH}"
+add-to-path "${GOPATH}/bin:${PATH}"
+add-to-path "/home/pilar/.npm-global/bin:${PATH}"
 
 # Source SSH settings, if applicable
 
@@ -26,3 +42,6 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
+add-to-path "$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+

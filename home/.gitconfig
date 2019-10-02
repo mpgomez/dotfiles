@@ -18,7 +18,7 @@
         tool = vimdiff
 [user]
 	name = Pilar Gomez
-	email = mp.gomezmoya@gmail.com
+	email = 678471+mpgomez@users.noreply.github.com
 [core]
         editor = vim
         tespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -33,3 +33,5 @@
 
 [commit]
 	template = /home/pilar/.git-commit-template.txt
+[pull]
+	rebase = true
