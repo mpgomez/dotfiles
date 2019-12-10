@@ -26,10 +26,11 @@ add-to-path () {
 }
 
 # Update PATH
-add-to-path "$HOME/.pkenv/bin:$PATH"
-add-to-path "/home/pilar/Software/bin/:${PATH}"
-add-to-path "${GOPATH}/bin:${PATH}"
-add-to-path "/home/pilar/.npm-global/bin:${PATH}"
+add-to-path "$HOME/.pkenv/bin"
+add-to-path "/home/pilar/Software/bin/"
+add-to-path "${GOPATH}/bin"
+add-to-path "/home/pilar/.npm-global/bin"
+add-to-path "/home/pilar/.tfenv"
 
 # Source SSH settings, if applicable
 
@@ -42,6 +43,6 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
-add-to-path "$HOME/.rbenv/bin:$PATH"
+add-to-path "$HOME/.rbenv/bin"
 eval "$(rbenv init -)"
 

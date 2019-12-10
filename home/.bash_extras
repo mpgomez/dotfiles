@@ -12,4 +12,41 @@ if [ -f '/home/pilar/Software/google-cloud-sdk/path.bash.inc' ]; then source '/h
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/pilar/Software/google-cloud-sdk/completion.bash.inc' ]; then source '/home/pilar/Software/google-cloud-sdk/completion.bash.inc'; fi
 
+source /usr/local/bin/virtualenvwrapper.sh 
 
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Will add to path only if:
+# * The directory or file exists
+# * And it is not already in the path
+add-to-path () {
+  if test -e "$1"; then
+    if ! echo "$PATH" | /bin/grep -Eq "(^|:)$1($|:)" ; then
+      if [ "$2" = "after" ] ; then
+        PATH="$PATH:$1"
+      else
+        PATH="$1:$PATH"
+      fi
+    fi
+  fi
+}
+
+# Update PATH
+add-to-path "$HOME/.pkenv/bin"
+add-to-path "/home/pilar/Software/bin/"
+add-to-path "${GOPATH}/bin"
+add-to-path "/home/pilar/.npm-global/bin"
+add-to-path "/home/pilar/.tfenv/bin"
+add-to-path "$HOME/.tgenv/bin"
+add-to-path "$HOME/.pyenv/bin"
+add-to-path "$HOME/.rbenv/bin"
+add-to-path "$HOME/.rbenv/plugins/ruby-build/bin"
+add-to-path "$HOME/bin"
+eval "$(rbenv init -)"
