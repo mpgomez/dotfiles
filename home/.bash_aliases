@@ -41,4 +41,3 @@ if [ -f ~/.bash_vars ]; then
     . ~/.bash_vars
 fi
 
-source ~/.bash_work/.hmrc
